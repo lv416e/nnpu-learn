@@ -1,0 +1,7 @@
+AWS_REGION                = ""
+AWS_ACCOUNT_ID            = ""
+AWS_PROFILE               = ""
+BUCKET_NAME               = ""
+SAGEMAKER_EXEC_ROLE_NAME  = ""
+SAGEMAKER_REPOSITORY_NAME = ""
+USER_NAME                 = ""

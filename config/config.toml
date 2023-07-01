@@ -1,0 +1,42 @@
+[training]
+train_batch_size = 5120
+valid_batch_size = 512
+epochs = 100
+verbose = 8
+is_save = false
+is_eval = true
+eval_each_epoch = 2
+model_save_dir = "./outputs/models"
+
+[model]
+model_name = "mlp"
+
+[network]
+in_features = 784
+hide_features = 300
+out_features = 1
+
+[optimizer]
+loss_fn = "sigmoid"
+optimizer = "adam"
+lr = 1e-3
+weight_decay = 0.005
+
+[dataset]
+dataset_name = "mnist"
+
+[mnist-prior]
+prior = 0.4915
+
+[loss]
+is_nnpu = true
+
+[scheduler]
+scheduler_name = "step"
+
+[sagemaker]
+use_sagemaker_training = false
+trainer_name = "nnpul-trainers"
+
+[bucket]
+bucket_name = "nnpul-trainer-bucket"

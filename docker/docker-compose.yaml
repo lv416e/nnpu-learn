@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  training-job:
+    image: ${REPOSITORY_NAME}:${VERSION}
+    container_name: nnpul-training-job
+    build:
+      context: ./training-job
+      dockerfile: Dockerfile
+
+  engine:
+    image: python:3.10.4-buster
+    container_name: nnpul-engine
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+    ports:
+      - '5050:5050'
+    volumes:
+      - '../:/app'
+    working_dir: '/app'
+    command:
+      - 'python'
+      - '/app/main.py'
+
+  jupyter:
+    image: jupyter/minimal-notebook:notebook-6.4.10
+    container_name: nnpul-jupyter
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:8888:8888'
+    volumes:
+      - '../:/app'
+    working_dir: '/app'
+    restart: always
+    entrypoint: >
+      jupyter notebook
+      --allow-root
+      --ip=0.0.0.0
+      --no-browser
+      --NotebookApp.token=''
+      --NotebookApp.password=''
+      --notebook-dir=/app/
